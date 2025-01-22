@@ -98,6 +98,8 @@ export class AdminHomeComponent implements OnInit {
     this.confirmationService.confirm({
       message: '¿Estás seguro de querer eliminar este curso?',
       header: 'Eliminar curso',
+      acceptLabel: 'Eliminar',
+      rejectLabel: 'Cancelar',
       accept: () => {
         this.adminService.removeCourse(courseId).subscribe({
           next: () => {
@@ -184,5 +186,9 @@ export class AdminHomeComponent implements OnInit {
         this.editCourseLoading.set(false);
       },
     });
+  }
+
+  navigateToStudentList(courseId: number) {
+    this.router.navigate(['admin', 'student-list', courseId]);
   }
 }

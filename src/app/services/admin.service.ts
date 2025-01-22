@@ -7,6 +7,9 @@ import {
   CourseMetrics,
   Requirement,
   EditCourseDto,
+  RemoveRequirementDto,
+  User,
+  RequirementAttemptResult,
 } from '@types';
 import { delay, map, Observable, tap } from 'rxjs';
 
@@ -59,6 +62,11 @@ export class AdminService {
     return this.http.get<Requirement[]>(url).pipe(delay(1000));
   }
 
+  removeRequirement({ courseId, requirementId }: RemoveRequirementDto) {
+    const url = `${this.apiUrl}/admin/course-content/${courseId}/${requirementId}`;
+    return this.http.delete(url).pipe(delay(1000));
+  }
+
   checkIfThereIsAnyAttemptInCourse(courseId: number): Observable<boolean> {
     const url = `${this.apiUrl}/courses/exists-attempts/${courseId}`;
     return this.http.get<{ hasAttempts: boolean }>(url).pipe(
@@ -70,6 +78,21 @@ export class AdminService {
   updateRequirement(requirement: Requirement) {
     const url = `${this.apiUrl}/admin/requirements/${requirement.id}`;
     return this.http.put(url, requirement).pipe(delay(1000));
+  }
+
+  getStudentsByCourseId(courseId: number): Observable<User[]> {
+    const url = `${this.apiUrl}/admin/students/${courseId}`;
+    return this.http.get<User[]>(url).pipe(delay(1000));
+  }
+
+  getStudentById(studentId: number): Observable<User> {
+    const url = `${this.apiUrl}/admin/student/${studentId}`;
+    return this.http.get<User>(url).pipe(delay(1000));
+  }
+
+  getAttemptResults(attemptId: number): Observable<RequirementAttemptResult[]> {
+    const url = `${this.apiUrl}/admin/attempt-result/${attemptId}`;
+    return this.http.get<RequirementAttemptResult[]>(url).pipe(delay(1000));
   }
 
   downloadTemplate() {
