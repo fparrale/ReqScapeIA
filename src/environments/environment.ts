@@ -1,8 +1,5 @@
 export const environment = {
-  apiUrl: 'https://franklinparrales.es/ReqScapeNew',
+  apiUrl: 'https://franklinparrales.es/ReqScapeIA',
   templateUrl:
     'https://franklinparrales.es/RECURSOS/Plantilla-Banco-de-Requerimientos.xlsx',
-  // apiUrl: 'https://wilmerchavez.com/ReqScapeNew',
-  // templateUrl:
-  //   'https://wilmerchavez.com/templates/Plantilla-Banco-de-Requerimientos.xlsx',
 };
